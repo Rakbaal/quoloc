@@ -1,0 +1,19 @@
+services:
+  mariadb:
+    image: mariadb:11.1.2
+    container_name: quoloc.db
+    ports:
+      - "3306:3306"
+    env_file:
+      - ./.env
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+
+  adminer:
+    image: phpmyadmin:5.2.1
+    container_name: quoloc.phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_HOST=mariadb
+      - PMA_PORT=3306
